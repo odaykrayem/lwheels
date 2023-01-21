@@ -34,11 +34,16 @@ Route::group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers\Api\V1', 'm
     Route::post('wheel_points', 'UserController@wheelPoints');
     Route::get('contest_list', 'ContestController@list');
     Route::get('withdrawal_list', 'WithdrawalController@list');
+    Route::get('referral_list', 'RefRecordController@list');
+    Route::post('winners_List', 'ParticipantController@list');
     Route::get('get_min_points', 'CustomValueController@getMinPoints');
     Route::get('get_min_balance', 'CustomValueController@getMinBalance');
     Route::get('user_info', 'UserController@getUserInfo');
     Route::post('transfer_points', 'UserController@transferPoints');
     Route::post('withdraw_balance', 'UserController@withdrawBalance');
+    Route::post('reward', 'UserController@reward');
+    Route::get('reward_list', 'RewardController@list');
+
 
     // Route::group(['prefix' => 'contests'], function(){
     //   Route::get('list', 'ContestController@list');

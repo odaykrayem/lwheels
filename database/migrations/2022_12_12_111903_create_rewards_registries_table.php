@@ -17,8 +17,6 @@ class CreateRewardsRegistriesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('reward_id');
-            $table->dateTime('started_at');
-            $table->boolean('is_finished');
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('reward_id')->references('id')->on('rewards');
             $table->timestamps();

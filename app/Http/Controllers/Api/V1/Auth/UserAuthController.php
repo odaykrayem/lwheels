@@ -53,11 +53,16 @@ class UserAuthController extends Controller
             } while (!empty($user_code));
             $pass = bcrypt($request->password);
 
+            $refTimesExist = CustomValue::where('key', 'ref_times')->exists();
+            $refTimes = 10;
+            if($refTimesExist){
+                $refTimes = CustomValue::where('key', 'ref_times')->first()['value'];
+            }
 
             $userCreds = [
                 'f_name' => $request->f_name,
                 'l_name' => $request->l_name,
-                'ref_times' => 6,
+                'ref_times' => $refTimes,
                 'phone' => $request->phone,
                 'ref_code' => $refcode,
                 'password' => $pass,
@@ -78,6 +83,9 @@ class UserAuthController extends Controller
                        if($addPointUser != null){
                         User::where('id', [$refOnwer->id])->update([
                             'points' => $refOnwer->points + $addPointOwner->value,
+                        ]);
+                        User::where('id', [$refOnwer->id])->update([
+                            'ref_times' => $refOnwer->ref_times - 1 ,
                         ]);
                         User::where('id', [$userCreate->id])->update([
                             'points' => $userCreate->points + $addPointUser->value,

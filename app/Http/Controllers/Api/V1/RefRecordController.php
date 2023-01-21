@@ -6,18 +6,35 @@ use App\Http\Controllers\Controller;
 
 use App\Models\RefRecord;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+
 
 class RefRecordController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
+    {}
+
+
+    public function list(Request $request)
     {
-        //
+            $userId =  Auth::id();
+            $list = RefRecord::where('owner_id', $userId)->get();
+
+            foreach ($list as $obj) {
+                $userName = User::select('f_name', 'l_name')->where('id',$obj['user_id'])->first();
+                $obj['user_name'] = $userName['f_name'] . " " . $userName['l_name'];
+            }
+
+            return response()->json(
+                [
+                    'data' => $list
+                ],200
+            );
+
     }
+
 
     /**
      * Show the form for creating a new resource.

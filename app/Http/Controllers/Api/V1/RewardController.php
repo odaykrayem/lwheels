@@ -5,7 +5,12 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 
 use App\Models\Reward;
+use App\Models\RewardsRegistry;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
+
+
 
 class RewardController extends Controller
 {
@@ -19,6 +24,39 @@ class RewardController extends Controller
         //
     }
 
+    public function list(Request $request)
+    {
+        // if(isset($request['user_id'])){
+            $userId =  Auth::id();
+            // $user = User::find($userId);
+            // $user_id = $request['user_id'];
+            $list = Reward::all();
+            foreach ($list as $reward) {
+                $rewardId = $reward['id'];
+                $rewardDuration = $reward['duration'];
+
+                $registryExist = RewardsRegistry::where('reward_id' , $rewardId)->where('user_id', $userId)->exists();
+                if($registryExist){
+                    $rewardRegistry = RewardsRegistry::where('reward_id' , $rewardId)->where('user_id', $userId)->first();
+                    $isRewardAvailabelForUser = Carbon::now()->diffInMinutes($rewardRegistry['created_at']) >= $rewardDuration;
+
+                }else{
+                    $isRewardAvailabelForUser = false;
+                }
+
+                $reward['is_on'] = $isRewardAvailabelForUser;
+            }
+
+            return response()->json(
+                [
+                    'data' => $list
+                ],200
+            );
+        // }else{
+        //     echo 'no';
+        // }
+
+    }
     /**
      * Show the form for creating a new resource.
      *

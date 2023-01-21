@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 
 use App\Models\Referral;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class ReferralController extends Controller
 {
@@ -18,6 +20,7 @@ class ReferralController extends Controller
     {
         //
     }
+
 
     /**
      * Show the form for creating a new resource.

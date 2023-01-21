@@ -7,12 +7,30 @@ use App\Http\Resources\V1\ParticipantResource;
 use App\Models\Participant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 
 class ParticipantController extends Controller
 {
     public function index()
     {}
+
+    public function list(Request $request)
+    {
+            $userId =  Auth::id();
+            $list = Participant::where('contest_id', $request['contest_id'])->where('is_winner', true)->get();
+
+            foreach ($list as $obj) {
+                $userName = User::select('f_name', 'l_name')->where('id',$obj['user_id'])->first();
+                $obj['user_name'] = $userName['f_name'] . " " . $userName['l_name'];
+            }
+
+            return response()->json(
+                [
+                    'data' => $list
+                ],200
+            );
+    }
 
     public function create()
     {}
