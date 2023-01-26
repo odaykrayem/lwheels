@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class CustomValue extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'key',
+        'value',
+    ];
+
+    protected $casts = [
+        'value'=> 'integer',
+    ];
 }

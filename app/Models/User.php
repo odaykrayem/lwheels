@@ -11,7 +11,6 @@ use App\Models\Participant;
 use App\Models\Withdrawal;
 use App\Models\RefRecord;
 use App\Models\RewardsRegistry;
-use App\Models\RewardRecord;
 
 class User extends Authenticatable
 {
@@ -50,6 +49,10 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'ref_times' => 'integer',
+        'points' => 'integer',
+        'balance' => 'double'
+
     ];
 
 
@@ -62,9 +65,9 @@ class User extends Authenticatable
         return $this->hasMany(Withdrawal::class);
     }
 
-    public function rewardRecords (){
-        return $this->hasMany(RewardRecord::class);
-    }
+    // public function rewardRecords (){
+    //     return $this->hasMany(RewardRecord::class);
+    // }
 
     public function rewardRegistries (){
         return $this->hasMany(RewardsRegistry::class);

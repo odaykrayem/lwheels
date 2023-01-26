@@ -12,8 +12,11 @@ class RewardsRegistry extends Model
     protected $fillable = [
         'user_id',
         'reward_id',
-        'started_at',
-        'is_finished'
+    ];
+
+    protected $casts = [
+        'user_id'=> 'integer',
+        'reward_id'=> 'integer',
     ];
 
     public function user(): BelongsTo

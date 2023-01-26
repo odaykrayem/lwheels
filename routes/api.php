@@ -35,7 +35,7 @@ Route::group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers\Api\V1', 'm
     Route::get('contest_list', 'ContestController@list');
     Route::get('withdrawal_list', 'WithdrawalController@list');
     Route::get('referral_list', 'RefRecordController@list');
-    Route::post('winners_List', 'ParticipantController@list');
+    Route::post('winners_list', 'ParticipantController@list');
     Route::get('get_min_points', 'CustomValueController@getMinPoints');
     Route::get('get_min_balance', 'CustomValueController@getMinBalance');
     Route::get('user_info', 'UserController@getUserInfo');

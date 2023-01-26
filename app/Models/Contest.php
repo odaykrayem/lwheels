@@ -17,6 +17,8 @@ class Contest extends Model
 
     protected $casts = [
         'is_finished' => 'boolean',
+        'prize' => 'integer',
+        'duration' => 'integer'
     ];
 
     public function participants (){

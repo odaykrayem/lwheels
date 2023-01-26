@@ -21,8 +21,9 @@ class ParticipantController extends Controller
             $list = Participant::where('contest_id', $request['contest_id'])->where('is_winner', true)->get();
 
             foreach ($list as $obj) {
-                $userName = User::select('f_name', 'l_name')->where('id',$obj['user_id'])->first();
-                $obj['user_name'] = $userName['f_name'] . " " . $userName['l_name'];
+                $user = User::select('f_name', 'l_name', 'phone')->where('id',$obj['user_id'])->first();
+                $obj['user_name'] = $user['f_name'] . " " . $user['l_name'];
+                $obj['user_phone'] = $user['phone'];
             }
 
             return response()->json(

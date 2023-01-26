@@ -41,7 +41,7 @@ class RewardController extends Controller
                     $isRewardAvailabelForUser = Carbon::now()->diffInMinutes($rewardRegistry['created_at']) >= $rewardDuration;
 
                 }else{
-                    $isRewardAvailabelForUser = false;
+                    $isRewardAvailabelForUser = true;
                 }
 
                 $reward['is_on'] = $isRewardAvailabelForUser;

@@ -16,6 +16,13 @@ class Withdrawal extends Model
         'status'
     ];
 
+    protected $casts = [
+        'user_id'=> 'integer',
+        'amount'=> 'integer',
+        'status'=> 'boolean',
+    ];
+
+
     /**
      * Get the user that owns the Withdrawal
      *

@@ -12,4 +12,9 @@ class Reward extends Model
         'duration',
         'value'
     ];
+
+    protected $casts = [
+        'duration'=> 'integer',
+        'value'=> 'integer',
+    ];
 }

@@ -16,6 +16,12 @@ class Participant extends Model
 
     ];
 
+    protected $casts = [
+        'user_id'=> 'integer',
+        'contest_id'=> 'integer',
+        'is_winner'=> 'boolean',
+    ];
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
